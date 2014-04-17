@@ -16,7 +16,7 @@ Download and Install
 ====================
 
 <pre>
-git clone https://github.com/scusi/fetch.git
+go get github.com/scusi/fetch
 cd fetch
 go install
 </pre>
