@@ -28,7 +28,7 @@ After install you can call it like this:
 
 ```fetch http://somehost.tld/somepath/somefile.ext```
 
-The above command will download http://somehost.tld/somepath/somefile.ext to somefile.ext
+The above command will download to _somefile.ext_
 
 In case there is no filename within the url, like in the following example a generic filename is used.
 
