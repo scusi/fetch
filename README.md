@@ -20,3 +20,18 @@ go get github.com/scusi/fetch
 cd fetch
 go install
 </pre>
+
+Usage
+=====
+
+After install you can call it like this:
+
+```fetch http://somehost.tld/somepath/somefile.ext```
+
+The above command will download http://somehost.tld/somepath/somefile.ext to somefile.ext
+
+In case there is no filename within the url, like in the following example a generic filename is used.
+
+```fetch http://somehost.tld/somepath/```
+
+The above command will download, whatever is coming back as _outfile_, since there is no filename which could be extracted from the URL.
