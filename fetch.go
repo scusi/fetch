@@ -58,14 +58,19 @@ func filenameFromPath(path string) (filename string) {
 // writes the body to a file with the extracted filename,
 // and prints howmany bytes have been written to the file (with the name 
 // extracted previous) to standard output.
-func fetchFromUrl(uri string) (filename string) {
-	body := getContent(uri)
+func fetchFromUrl(uri string) (string) {
 	l, err := url.Parse(uri)
-        checkErr(err)
-	filename = filenameFromPath(l.Path)
+    checkErr(err)
+	var filename string
+	if filenameFromPath(l.Path) == "" {
+		filename = "outfile"
+	} else {
+		filename = filenameFromPath(l.Path)
+	}
+	body := getContent(uri)
 	i := writeFile(body, filename)
 	fmt.Printf("%d bytes written to '%s'\n", i, filename)
-	return
+	return filename
 }
 
 // gets the arguments 'fetch' was called with,
