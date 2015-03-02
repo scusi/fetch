@@ -12,6 +12,24 @@ import (
     "strings"
 )
 
+// getProxy - checks if a proxy is set via ENV HTTP_PROXY, http_proxy and returns that.
+func getProxy(req *http.Request) (url *url.URL, err error) {
+	var envprox string
+	envprox = os.Getenv("HTTP_PROXY")
+	if envprox == "" {
+		envprox = os.Getenv("http_proxy")
+	}
+	if envprox != "" {
+		u, err := url.Parse(envprox)
+		if err != nil {
+			return nil, err
+		}
+		return u, err
+	} else {
+		return nil, nil
+	}
+}
+
 // checkErr - a function to check the error return value of another function.
 func checkErr(err error) {
     if err != nil {
@@ -23,7 +41,9 @@ func checkErr(err error) {
 // getContent - takes an url as argument and returns the body of the document
 // from that url
 func getContent(url string) (b []byte) {
-    resp, err := http.Get(url)
+	tr := &http.Transport{Proxy: getProxy}
+	client := &http.Client{Transport: tr}
+    resp, err := client.Get(url)
     checkErr(err)
     defer resp.Body.Close()
     body, err := ioutil.ReadAll(resp.Body)
