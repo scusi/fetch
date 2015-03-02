@@ -35,3 +35,13 @@ In case there is no filename within the url, like in the following example a gen
 ```fetch http://somehost.tld/somepath/```
 
 The above command will download, whatever is coming back as _outfile_, since there is no filename which could be extracted from the URL.
+
+Proxy support
+-------------
+
+If you want to use a proxy you should export the environment variable HTTP_PROXY before you call fetch. This is needed only once. After your HTTP_PROXY environment variable was set _fetch_ will regorcnize it and use it.
+
+```
+export HTTP_PROXY="http://myproxy.tld:8080/"
+fetch http://somehost.tld/somepath/file.ext
+```
